@@ -6,13 +6,13 @@
             <nuxt-link to="/about">go about</nuxt-link>
             <nuxt-link to="/news">go news</nuxt-link>
           </p>
-          <Banner></Banner>
+          <Banner :banners="banners"></Banner>
 
-          <ul>
+          <!-- <ul>
             <li v-for="(b, i) in banners" :key="i">
               <img :src="b.imageUrl" alt="">
             </li>
-          </ul>
+          </ul> -->
       </div>
   </div>
 </template>
