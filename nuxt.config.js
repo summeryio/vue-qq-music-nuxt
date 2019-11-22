@@ -24,6 +24,7 @@ module.exports = {
   */
   css: [
     'element-ui/lib/theme-chalk/index.css',
+    'swiper/dist/css/swiper.css',
     '@/assets/css/style.scss'
   ],
   /*
@@ -31,7 +32,9 @@ module.exports = {
   */
   plugins: [
     '@/plugins/element-ui',
-    '@/plugins/vue-lazyload'
+    '@/plugins/vue-lazyload',
+    {src: '@/plugins/swiper-slide', ssr: false},
+    '@/plugins/vue-inject',
   ],
   /*
   ** Nuxt.js dev-modules

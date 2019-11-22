@@ -1,55 +1,47 @@
 <template>
-  <div class="container">
-      <div>
-          <p class="title">
-            <img v-lazy="lazyimg">
-            <nuxt-link to="/about">go about</nuxt-link>
-            <nuxt-link to="/news">go news</nuxt-link>
-          </p>
-          <Banner :banners="banners"></Banner>
-
-          <!-- <ul>
-            <li v-for="(b, i) in banners" :key="i">
-              <img :src="b.imageUrl" alt="">
-            </li>
-          </ul> -->
-      </div>
-  </div>
+    <div class="qq_music" id="home">
+        <Banner :banners="banners" />
+        <Playlist :playlists="playlists" />
+    </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-import Banner from '~/components/Banner.vue'
-import axios from 'axios'
-import {getHomeBanner} from '@/assets/js/api'
-// import {getBanner, getBanner2} from '@/assets/js2/api'
+import Playlist from '@/components/home/Playlist.vue'
+import Banner from '@/components/home/Banner.vue'
+
+import {getHomeBanner, getHomePlaylist} from '@/assets/js/api'
+import {spliceArray, formatCount} from '@/assets/js/util'
 
 export default {
-  components: {
-    Logo,
-    Banner
-  },
-  data() {
-    return {
-      lazyimg: 'https://y.gtimg.cn/music/common/upload/MUSIC_FOCUS/1855057.jpg?max_age=2592000',
-      banners: []
+    components: {
+        Banner,
+        Playlist
+    },
+    data() {
+        return {
+            banners: [],
+            playlists: []
+        }
+    },
+    async asyncData (ctx) {
+        /* return getHomePlaylist('全部').then(res => {
+            console.log(res.playlists);
+            return {
+                playlists: spliceArray(res.playlists, 5)
+            }
+        })
+        
+        return getHomeBanner().then(res => {
+            return { banners: spliceArray(res.banners, 2) }
+        }) */
+
+        let [bannersData] = await Promise.all([
+            getHomeBanner(),
+        ])
+
+        return {
+            banners: spliceArray(bannersData.banners, 2)
+        }
     }
-  },
-  asyncData ({app}) {//请求
-      
-      return getHomeBanner().then(res => {
-        console.log(res) 
-        return { banners: res.banners }
-      }).catch(err => {
-        console.log(err) 
-      })
-  },
 }
 </script>
-
-<style lang="scss" scoped>
-  a {
-    display: block;
-    margin: 20px 0;
-  }
-</style>
