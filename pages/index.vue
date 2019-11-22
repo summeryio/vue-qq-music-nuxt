@@ -12,6 +12,8 @@ import Banner from '@/components/home/Banner.vue'
 import {getHomeBanner, getHomePlaylist} from '@/assets/js/api'
 import {spliceArray, formatCount} from '@/assets/js/util'
 
+
+
 export default {
     components: {
         Banner,
@@ -35,12 +37,18 @@ export default {
             return { banners: spliceArray(res.banners, 2) }
         }) */
 
-        let [bannersData] = await Promise.all([
+
+
+        
+
+        let [bannersData, playlistsData] = await Promise.all([
             getHomeBanner(),
+            getHomePlaylist(),
         ])
 
         return {
-            banners: spliceArray(bannersData.banners, 2)
+            banners: spliceArray(bannersData.banners, 2),
+            playlists: spliceArray(playlistsData.playlists, 5)
         }
     }
 }

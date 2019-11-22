@@ -10,7 +10,11 @@ export const getSearchSuggest = (val) => get(`/search/suggest?keywords=${val}`)
 
 
 // 首页
-export const getHomePlaylist = (tag) => get(`/top/playlist?limit=${15}&cat=${tag}`)
+export const getHomePlaylist = (tag) => {
+    let _tag = tag || '全部'
+
+    return get(`/top/playlist?limit=${15}&cat=${encodeURIComponent(_tag)}`)
+}
 export const getHomePlaylistTag = () => get('/playlist/hot')
 export const getHomeAlbum = () => get('/album/newest')
 export const getNewSong = (tag) => get(`/top/song?type=${tag}`)

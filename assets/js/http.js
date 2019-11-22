@@ -46,13 +46,9 @@ axios.interceptors.response.use(
         }    
     },
     // 服务器状态码不是200的情况    
-    error => {        
-        if (error.response.status) {
-            /* Message({
-                showClose: true,
-                message: '数据获取出错，请刷新重试！',
-                type: 'warning'
-            }) */
+    error => {  
+        return error      
+        /* if (error.response.status) {
             Notification({
                 title: 'Error',
                 message: '数据获取出错，请刷新重试！',
@@ -60,7 +56,7 @@ axios.interceptors.response.use(
             })
                 
             return Promise.reject(error.response);        
-        }   
+        }    */
     }
 );
 /** 

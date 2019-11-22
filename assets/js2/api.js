@@ -11,6 +11,11 @@ export function getBanner() {
     method: 'get'
   })
 }
+export const getHomePlaylist = (tag) => {
+  let _tag = tag || '全部'
+
+  return get(`/top/playlist?limit=${15}`)
+}
 
 
 export const getBanner2 = () => get('/banner')

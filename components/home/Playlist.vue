@@ -78,9 +78,11 @@ export default {
     },
     mounted() {
         // this.getPlaylist('全部', 0)
+
+        console.log(this.playlists);
     },
     methods: {
-        getPlaylist(tag, mySwiper) {
+        /* getPlaylist(tag, mySwiper) {
             getHomePlaylist(tag).then(res => {
                 this.playlists = spliceArray(res.playlists, 5)
 
@@ -91,8 +93,8 @@ export default {
             return formatCount(count)
         },
         changeTag(tag, mySwiper) { // 切换tag
-            // this.getPlaylist(tag, mySwiper)
-        }
+            this.getPlaylist(tag, mySwiper)
+        } */
     }
 }
 </script>
