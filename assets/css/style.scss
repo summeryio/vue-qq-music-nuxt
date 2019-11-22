@@ -1,4 +1,257 @@
-body {
-    width: 100%;
-    height: 100vh;
+@import './reset.scss';
+@import './_mixin.scss';
+@import './_common.scss';
+
+.section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+@media (max-width: 1240px) {
+    body {
+        min-width:1180px
+    }
+
+    .main,.section-inner {
+        margin: 0 50px;
+        min-width: 900px;
+    }
+}
+
+
+// ================ 首页 ================
+#home {
+    .section-inner {
+        position: relative;
+        z-index: 2;
+        overflow: hidden;
+    }
+    .types-title {
+        position: relative;
+        padding: 50px 0 2%;
+        font-size: 24px;
+        color: #93999F;
+        letter-spacing: 0.6px;
+        line-height: 36px;
+        text-align: center;
+    
+        em {
+            font-size: 26px;
+            font-weight: 600;
+            color: #4D555D;
+            margin: 0 3px
+        }
+        .tit-icon {
+            display: inline-block;
+            vertical-align: top;
+            width: 56px;
+            height: 36px;
+            background: url(../images/types_title.png) no-repeat;
+            background-size: 100%
+        }
+        .tit-icon-l {
+            margin-right: 24px
+        }
+        .tit-icon-r {
+            margin-left: 24px
+        }
+        span.icon-star-l {
+            background-position: center -504px
+        }
+        span.icon-star-r {
+            background-position: center -540px
+        }
+        span.icon-new-l {
+            background-position: center -72px
+        }
+        span.icon-new-r {
+            background-position: center -108px
+        }
+        span.icon-new-r {
+            background-position: center -108px
+        }
+        span.icon-art-l {
+            background-position: center -360px
+        }
+        span.icon-art-r {
+            background-position: center -396px
+        }
+        span.icon-skill-l {
+            background-position: center -216px
+        }
+        span.icon-skill-r {
+            background-position: center -252px
+        }
+        span.icon-shizhan-l {
+            background-position: center 0
+        }
+        span.icon-shizhan-r {
+            background-position: center -36px
+        }
+    }
+    .card {
+        position: relative;
+        background: url(https://y.gtimg.cn/mediastyle/yqq/img/bg_detail.jpg) 50% 0 repeat-x;
+    }
+    .index-tab {
+        height: 50px;
+        text-align: center;
+        li {
+            display: inline-block;
+            font-size: 15px;
+            margin: 0 24px;
+            cursor: pointer;
+
+            &.active, &:hover {
+                @include highColor();
+            }
+        }
+    }
+
+    .swiper-container {
+        margin-bottom: 20px;
+    }
+    .newsong-list {
+        .item {}
+        .wrapper {
+            position: relative;
+            height: 86px;
+            overflow: hidden;
+            border-top: 1px solid #f2f2f2;
+            padding-top: 12px;
+            font-size: 14px;
+            box-sizing: content-box;
+            margin: -1px 30px 13px 0;
+        }
+        .pic {
+            position: relative;
+            float: left;
+            width: 86px;
+            height: 86px;
+            margin-right: 14px;
+            overflow: hidden;
+            &:hover {
+                img {
+                    transform: scale(1.07) translateZ(0);
+                    transition: transform .75s cubic-bezier(0,1,.75,1);
+                }
+            }
+
+            img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                
+                transform: scale(1) translateZ(0);
+                transition: transform .75s;
+            }
+            .play {
+                background-size: 68%;
+                background-repeat: no-repeat;
+                background-position: 50%;
+            }
+        }
+        .name {
+            font-size: 14px;
+            padding: 21px 0 2px;
+            max-width: 50%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-weight: 400;
+        }
+        .singer {
+            max-width: 50%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .time {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            line-height: 86px;
+            @include c_light();
+        }
+    }
+    .banner-list {
+        .wrapper {
+            margin: 0 6px;
+        }
+        .pic {
+            position: relative;
+            display: block;
+            width: 100%;
+            padding-top: 40%;
+
+            img {
+                @include ab_full();
+                object-fit: cover;
+            }
+        }
+    }
+    .card-mv {
+        /* .pic {
+            padding-top: 56.5476%;
+        } */
+        .mv-list {
+            margin-right: -20px;
+            font-size: 0;
+            @include clearfix();
+            & > li {
+                overflow: hidden;
+                position: relative;
+                float: left;
+                width: 20%;
+                font-size: 14px;
+                padding-bottom: 25px;
+            }
+            .wrapper {
+                
+                margin-right: 20px;
+            }
+            .pic {
+                position: relative;
+                display: block;
+                overflow: hidden;
+                padding-top: 56%;
+                margin-bottom: 12px;
+        
+                &:hover {
+                    img {
+                        transform: scale(1.07) translateZ(0);
+                        transition: transform .75s cubic-bezier(0,1,.75,1);
+                    }
+                }
+                img {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    
+                    transform: scale(1) translateZ(0);
+                    transition: transform .75s;
+                }
+            }
+            .intro {
+                .name {
+                    display: block;
+                    font-weight: 400;
+                    line-height: 22px;
+                    max-height: 44px;
+                    @include t_hide(100%);
+                }
+                .count {
+                    @include c_light();
+                }
+                .mod_singer_name {
+                    @include t_hide(100%);
+                }
+            }
+        }
+    }
 }

@@ -2,7 +2,7 @@
 <template>
   <div class="banner">
      <ul>
-            <li v-for="(b, i) in bannerData" :key="i">
+            <li v-for="(b, i) in banners" :key="i">
               <img :src="b.imageUrl" alt="">
             </li>
           </ul>
@@ -14,24 +14,27 @@ import axios from 'axios'
 export default {
   props: {
     banners: {
-      type: Array,
-      default: []
+      type: [Object, Array],
+      default: () => {}
     }
   },
-  data() {
+  /* data() {
     return {
       bannerData: this.banners
     }
-  },
+  }, */
   mounted() {
     let _self = this
-    axios({
+    /* axios({
           method: 'get',
           url: 'http://localhost:3001/banner'
       })
       .then(function (res) {
           _self.bannerData = res.data.banners
-      })
+      }) */
+
+      console.log(this.banners);
+
   }
 }
 </script>

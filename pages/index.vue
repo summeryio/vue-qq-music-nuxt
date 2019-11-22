@@ -21,6 +21,8 @@
 import Logo from '~/components/Logo.vue'
 import Banner from '~/components/Banner.vue'
 import axios from 'axios'
+import {getHomeBanner} from '@/assets/js/api'
+// import {getBanner, getBanner2} from '@/assets/js2/api'
 
 export default {
   components: {
@@ -34,13 +36,12 @@ export default {
     }
   },
   asyncData ({app}) {//请求
-      return  axios({
-          method: 'get',
-          url: 'http://localhost:3001/banner'
-      })
-      .then(function (res) {
-          return { banners: res.data.banners};
-          error(params)
+      
+      return getHomeBanner().then(res => {
+        console.log(res) 
+        return { banners: res.banners }
+      }).catch(err => {
+        console.log(err) 
       })
   },
 }
