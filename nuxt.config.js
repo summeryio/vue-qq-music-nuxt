@@ -1,4 +1,3 @@
-
 module.exports = {
   mode: 'universal',
   /*
@@ -12,7 +11,7 @@ module.exports = {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+      { rel: 'icon', type: 'image/x-icon', href: 'https://y.qq.com/favicon.ico?max_age=2592000' }
     ]
   },
   /*
@@ -50,15 +49,8 @@ module.exports = {
   ** Build configuration
   */
   build: {
-    transpile: [/^element-ui/],
-    /*
-    ** You can extend webpack config here
-    */
-    extend (config, ctx) {
-    },
-
-    analyze: true, // analyze 输出体积页面
-    // maxChunkSize: 300000
+    extractCSS: true,
+    analyze: true,
 
     // element-ui 按需加载
     vendor:[
@@ -69,5 +61,13 @@ module.exports = {
         [ "component", {"libraryName": "element-ui",  "styleLibraryName": "theme-chalk"}] 
       ] 
     },
+
+    // 优化打包体积
+    optimization: {
+      splitChunks: {
+        minSize: 10000,
+        maxSize: 250000
+      }
+    }
   },
 }

@@ -19,10 +19,10 @@
         </div>
         <div class="mod_swiper_action">
             <div class="item left">
-                <a href="javascript: void(0);" class="swiper_action-prev" :class="mark + '_active_prev'"><i></i></a>
+                <a href="javascript: void(0);" class="swiper_action-prev" :class="mark + '_active_prev'"><i class="mod_sprite"></i></a>
             </div>
             <div class="item right">
-                <a href="javascript: void(0);" class="swiper_action-next" :class="mark + '_active_next'"><i></i></a>
+                <a href="javascript: void(0);" class="swiper_action-next" :class="mark + '_active_next'"><i class="mod_sprite"></i></a>
             </div>
         </div>
     </div>
