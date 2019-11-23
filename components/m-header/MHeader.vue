@@ -9,7 +9,7 @@
                 </el-col>
                 <el-col :span="14" :offset="1">
                     <ul class="nav">
-                        <li><router-link to="/">音乐馆</router-link></li>
+                        <li><nuxt-link to="/about">音乐馆</nuxt-link></li>
                         <li><router-link to="/singer">歌手</router-link></li>
                         <li><router-link to="/album">新碟</router-link></li>
                         <li><router-link to="/rank">排行榜</router-link></li>

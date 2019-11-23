@@ -5,7 +5,7 @@
         </h3>
         <Slider :tags="tags" @select="changeTag" :mark="mark">
             <div class="swiper-wrapper">
-                <div class="swiper-slide" v-for="(slide, i) in playlists" :key="i">
+                <div class="swiper-slide" v-for="(slide, i) in datas" :key="i">
                     <ul class="mod_playlist_box">
                         <li v-for="item in slide" :key="item.id">
                             <div class="wrapper">
@@ -16,7 +16,7 @@
                                 </a>
                                 <div class="intro">
                                     <a href="/" class="name">{{item.name}}</a>
-                                    <!-- <p class="count">播放量：{{formatCount(item.playCount)}}</p> -->
+                                    <p class="count">播放量：{{formatCount(item.playCount)}}</p>
                                 </div>
                             </div>
                         </li>
@@ -71,20 +71,17 @@ export default {
     },
     data () {
         return {
-            // playlists: [],
+            datas: this.playlists,
             tags: TAGS,
             mark: 'recommend'
         }
     },
     mounted() {
-        // this.getPlaylist('全部', 0)
-
-        console.log(this.playlists);
     },
     methods: {
-        /* getPlaylist(tag, mySwiper) {
+        getPlaylist(tag, mySwiper) {
             getHomePlaylist(tag).then(res => {
-                this.playlists = spliceArray(res.playlists, 5)
+                this.datas = spliceArray(res.playlists, 5)
 
                 mySwiper && mySwiper.slideTo(0, false)
             })
@@ -94,7 +91,7 @@ export default {
         },
         changeTag(tag, mySwiper) { // 切换tag
             this.getPlaylist(tag, mySwiper)
-        } */
+        }
     }
 }
 </script>

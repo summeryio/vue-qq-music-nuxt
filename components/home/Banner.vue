@@ -3,7 +3,7 @@
         <h3 class="types-title">
             <span class="tit-icon icon-art-l tit-icon-l"></span><em>精</em>／<em>彩</em>／<em>推</em>／<em>荐</em><span class="tit-icon icon-art-r tit-icon-r"></span>
         </h3>
-        <Slider :tags="tags" :mark="mark">
+        <Slider :mark="mark">
             <div class="swiper-wrapper">
                 <div class="swiper-slide" v-for="(slide, i) in banners" :key="i">
                     <el-row class="banner-list">
@@ -39,12 +39,10 @@ export default {
     },
     data () {
         return {
-            tags: [],
             mark: 'banner'
         }
     },
     mounted() {
-        // this.print(this.banners);
     },
     methods: {
     }

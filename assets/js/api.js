@@ -17,6 +17,14 @@ export const getHomePlaylist = (tag) => {
 }
 export const getHomePlaylistTag = () => get('/playlist/hot')
 export const getHomeAlbum = () => get('/album/newest')
-export const getNewSong = (tag) => get(`/top/song?type=${tag}`)
+export const getNewSong = (tag) => {
+    let _tag = tag || 0
+    
+    return get(`/top/song?type=${_tag}`)
+}
 export const getHomeBanner = () => get('/banner')
-export const getHomeMV = (tag) => get(`/mv/first?limit=20&area=${tag}`)
+export const getHomeMV = (tag) => {
+    let _tag = tag ? encodeURIComponent(tag) : ''
+    
+    return get(`/mv/first?limit=20&area=${_tag}`)
+}

@@ -2,6 +2,7 @@
   <div id="app">
     <MHeader />
     <nuxt />
+    <footer id="footer"></footer>
   </div>
 </template>
 
@@ -13,6 +14,9 @@ export default {
   }
 }
 </script>
-<style>
-
+<style scoped>
+#footer {
+  height: 200px;
+  background-color: #333;
+}
 </style>

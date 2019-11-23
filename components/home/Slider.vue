@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="section-inner">
-            <ul class="index-tab" v-if="tags.length > 0">
+            <ul class="index-tab" v-if="tags && tags.length > 0">
                 <li 
                     v-for="(tag, i) in tags" 
                     :class="{active: i === curTag}" 
@@ -35,8 +35,8 @@ export default {
     },
     props: {
         tags: {
-            type: Array,
-            default: []
+            type: [Object, Array],
+            default: () => {}
         },
         mark: {
             type: String,

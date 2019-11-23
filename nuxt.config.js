@@ -18,7 +18,7 @@ module.exports = {
   /*
   ** Customize the progress-bar color
   */
-  loading: { color: '#fff' },
+  loading: { color: '#31c27c' },
   /*
   ** Global CSS
   */
@@ -32,6 +32,7 @@ module.exports = {
   */
   plugins: [
     '@/plugins/element-ui',
+    // {src: '@/plugins/element-ui', ssr: false},
     '@/plugins/vue-lazyload',
     {src: '@/plugins/swiper-slide', ssr: false},
     '@/plugins/vue-inject',
@@ -55,6 +56,25 @@ module.exports = {
     ** You can extend webpack config here
     */
     extend (config, ctx) {
-    }
-  }
+    },
+
+    // analyze: true,
+    // maxChunkSize: 300000
+  },
+
+  // element-ui 按需加载
+  /* vender:[
+    'element-ui'
+  ],
+  babel:{
+    "plugins": [["component", [
+      {
+        "libraryName": "element-ui",
+        "styleLibraryName": "theme-default"
+      },
+      'transform-async-to-generator',
+      'transform-runtime'
+    ]]],
+    comments: true
+  }, */
 }

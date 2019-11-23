@@ -32,17 +32,17 @@ export default {
     components: {
         SingerName
     },
+    props: {
+        albums: {
+            type: [Object, Array],
+            default: () => {}
+        }
+    },
     data () {
         return {
-            albums: [],
-            tags: [],
-            mark: 'recommend'
         }
     },
     mounted() {
-        getHomeAlbum().then(res => {
-            this.albums = res.albums.splice(0, 10)
-        })
     },
     methods: {
     }
