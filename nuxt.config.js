@@ -23,7 +23,6 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    'element-ui/lib/theme-chalk/index.css',
     'swiper/dist/css/swiper.css',
     '@/assets/css/style.scss'
   ],
@@ -31,8 +30,8 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/element-ui',
-    // {src: '@/plugins/element-ui', ssr: false},
+    // '@/plugins/element-ui',
+    {src: '@/plugins/element-ui', ssr: true},
     '@/plugins/vue-lazyload',
     {src: '@/plugins/swiper-slide', ssr: false},
     '@/plugins/vue-inject',
@@ -58,23 +57,17 @@ module.exports = {
     extend (config, ctx) {
     },
 
-    // analyze: true,
+    analyze: true, // analyze 输出体积页面
     // maxChunkSize: 300000
-  },
 
-  // element-ui 按需加载
-  /* vender:[
-    'element-ui'
-  ],
-  babel:{
-    "plugins": [["component", [
-      {
-        "libraryName": "element-ui",
-        "styleLibraryName": "theme-default"
-      },
-      'transform-async-to-generator',
-      'transform-runtime'
-    ]]],
-    comments: true
-  }, */
+    // element-ui 按需加载
+    vendor:[
+      'element-ui'
+    ],
+    babel:{
+      plugins: [
+        [ "component", {"libraryName": "element-ui",  "styleLibraryName": "theme-chalk"}] 
+      ] 
+    },
+  },
 }

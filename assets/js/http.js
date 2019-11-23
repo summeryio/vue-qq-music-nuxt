@@ -4,7 +4,7 @@
 import axios from 'axios';
 import QS from 'qs';
 import Vue from 'vue'
-import {Message, Notification} from 'element-ui'
+// import {Message, Notification} from 'element-ui'
 
 // 环境的切换
 if (process.env.NODE_ENV == 'development') {    
