@@ -11,7 +11,8 @@ module.exports = {
       { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: 'https://y.qq.com/favicon.ico?max_age=2592000' }
+      { rel: 'icon', type: 'image/x-icon', href: 'https://y.qq.com/favicon.ico?max_age=2592000' },
+      {rel: 'stylesheet', href: 'https://cdn.bootcss.com/Swiper/4.5.1/css/swiper.min.css'}
     ]
   },
   /*
@@ -22,7 +23,6 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    'swiper/dist/css/swiper.css',
     '@/assets/css/style.scss'
   ],
   /*

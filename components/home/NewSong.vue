@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import {getNewSong} from '@/assets/js/api'
+import {getHomeNewSong} from '@/assets/js/api'
 import {formatCount, spliceArray} from '@/assets/js/util'
 import SingerName from '@/components/SingerName'
 import Slider from './Slider'
@@ -78,7 +78,7 @@ export default {
     },
     methods: {
         _getNewSong(tag, mySwiper) {
-            getNewSong(tag).then(res => {
+            getHomeNewSong(tag).then(res => {
                 this.datas = spliceArray(res.data.splice(0, 36), 9)
 
                 mySwiper && mySwiper.slideTo(0, false)
