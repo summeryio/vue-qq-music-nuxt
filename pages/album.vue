@@ -1,5 +1,5 @@
 <template>
-    <div class="card card-recommend mod_slider_box">
+    <div class="qq_music" id="album">
         <div class="section-inner">
             <h3 class="mod_types-title">
                 <span class="tit-icon icon-skill-l tit-icon-l"></span><em>新</em>／<em>碟</em>／<em>首</em>／<em>发</em><span class="tit-icon icon-skill-r tit-icon-r"></span>
@@ -20,31 +20,47 @@
                 </li>
             </ul>
         </div>
+
+        <div class="mod_pagination">
+            <el-pagination
+                background
+                layout="prev, pager, next"
+                :total="total"
+                @current-change="handlePage"
+            >
+            </el-pagination>
+        </div>
     </div>
 </template>
 
 <script>
-import {getHomeAlbum} from '@/assets/js/api'
-import {formatCount} from '@/assets/js/util'
+import {getAlbum} from '@/assets/js/api'
 import SingerName from '@/components/SingerName'
 
 export default {
     components: {
         SingerName
     },
-    props: {
-        albums: {
-            type: [Object, Array],
-            default: () => {}
-        }
-    },
     data () {
         return {
+            albums: [],
+            total: 0
         }
     },
-    mounted() {
+    asyncData(ctx) {
+        return getAlbum().then(res => {
+            return {
+                albums: res.albums,
+                total: res.total
+            }
+        })
     },
     methods: {
+        handlePage(page) {
+            getAlbum(page).then(res => {
+                this.albums = res.albums
+            })
+        }
     }
 }
 </script>

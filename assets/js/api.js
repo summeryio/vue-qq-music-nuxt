@@ -17,7 +17,7 @@ export const getHomePlaylist = (tag) => {
 }
 export const getHomePlaylistTag = () => get('/playlist/hot')
 export const getHomeAlbum = () => get('/album/newest')
-export const getNewSong = (tag) => {
+export const getHomeNewSong = (tag) => {
     let _tag = tag || 0
     
     return get(`/top/song?type=${_tag}`)
@@ -28,3 +28,7 @@ export const getHomeMV = (tag) => {
     
     return get(`/mv/first?limit=20&area=${_tag}`)
 }
+
+
+// 新碟上架
+export const getAlbum = (page = 0) => get(`/top/album?offset=${page}&limit=20`)

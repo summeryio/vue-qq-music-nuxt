@@ -1,6 +1,6 @@
 <template>
     <div class="card card-banner mod_slider_box">
-        <h3 class="types-title">
+        <h3 class="mod_types-title">
             <span class="tit-icon icon-art-l tit-icon-l"></span><em>精</em>／<em>彩</em>／<em>推</em>／<em>荐</em><span class="tit-icon icon-art-r tit-icon-r"></span>
         </h3>
         <Slider :mark="mark">

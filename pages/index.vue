@@ -15,7 +15,7 @@ import Banner from '@/components/home/Banner.vue'
 import Album from '@/components/home/Album.vue'
 import MV from '@/components/home/MV.vue'
 
-import {getHomeBanner, getHomePlaylist, getNewSong, getHomeAlbum, getHomeMV} from '@/assets/js/api'
+import {getHomeBanner, getHomePlaylist, getHomeNewSong, getHomeAlbum, getHomeMV} from '@/assets/js/api'
 import {spliceArray, formatCount} from '@/assets/js/util'
 
 
@@ -41,7 +41,7 @@ export default {
         let [bannersData, playlistsData, newsongsData, albumsData, mvsData] = await Promise.all([
             getHomeBanner(),
             getHomePlaylist(),
-            getNewSong(),
+            getHomeNewSong(),
             getHomeAlbum(),
             getHomeMV()
         ])
