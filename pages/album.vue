@@ -26,6 +26,7 @@
                 background
                 layout="prev, pager, next"
                 :total="total"
+                :page-size="pageSize"
                 @current-change="handlePage"
             >
             </el-pagination>
@@ -44,7 +45,8 @@ export default {
     data () {
         return {
             albums: [],
-            total: 0
+            total: 0,
+            pageSize: 20
         }
     },
     asyncData(ctx) {
@@ -57,7 +59,7 @@ export default {
     },
     methods: {
         handlePage(page) {
-            getAlbum(page).then(res => {
+            getAlbum(page, this.pageSize).then(res => {
                 this.albums = res.albums
             })
         }

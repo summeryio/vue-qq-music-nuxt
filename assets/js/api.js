@@ -31,4 +31,6 @@ export const getHomeMV = (tag) => {
 
 
 // 新碟上架
-export const getAlbum = (page = 0) => get(`/top/album?offset=${page}&limit=20`)
+export const getAlbum = (page = 1, pageSize = 20) => {
+    return get(`/top/album?offset=${(page - 1) * pageSize}&limit=${pageSize}`)
+}
