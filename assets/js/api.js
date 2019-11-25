@@ -34,3 +34,6 @@ export const getHomeMV = (tag) => {
 export const getAlbum = (page = 1, pageSize = 20) => {
     return get(`/top/album?offset=${(page - 1) * pageSize}&limit=${pageSize}`)
 }
+
+// 歌单
+export const getPlaylistTag = () => get(`/playlist/catlist`)
