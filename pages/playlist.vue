@@ -44,7 +44,22 @@
                     </ul>
                 </div>
             </div> -->
-            <div class="category" v-html="test"></div>
+            <div class="category">
+                <dl v-for="(cat, c) in cats" :key="c" :class="{less: c === 0}">
+                    <dt>{{cat.title}}</dt>
+                    <dd v-for="(item, i) in cat.list" :key="i">
+                        <span>{{item}}</span>
+                    </dd>
+                    <dd v-if="cat.more.length">
+                        <span @click="showMoreTag(cat.more, c)">更多<i class="el-icon-arrow-down"></i></span>
+                    </dd>
+                </dl>
+                <div class="popup-tag" v-show="showCat">
+                    <ul>
+                        <li v-for="(cat, i) in moreCats"><a href="javascript:;">{{cat}}</a></li>
+                    </ul>
+                </div>
+            </div>
       </div>
   </div>
 </template>
@@ -55,54 +70,40 @@ import {formatPlaylistTag} from '@/assets/js/util'
 export default {
     data () {
         return {
-            playlists: [],
-            cats: {},
-            total: 0,
-            pageSize: 20
+            cats: [],
+            moreCats: [],
+            showCat: false,
+            moreCatIndex: 0
         }
     },
-    asyncData(ctx) {
+    /* asyncData(ctx) {
         return getPlaylistTag().then(res => {
             return {
                 cats: res
             }
         })
-    },
-    computed: {
-        test() {
-            let _self = this
-            
-            let temp = Object.keys(this.cats.categories).map(((key, i) => {
-                let val = _self.cats.categories[key]
-                key = parseInt(key)
-
-                let subTemp = _self.cats.sub.map((item, i) => {
-                    let str = /\//g
-                    
-                    if (item.category === key && !str.test(item.name)) {
-                        return `<dd>
-                                    <span>${item.name}</span>
-                                </dd>`
-                    }
-                })
-                let cls = i === 0 ? 'less' : ''
-                
-                return `<dl class="${cls}">
-                    <dt>${val}</dt>
-                    ${subTemp.join('')}
-                </dl>`
-            }))
-
-            return temp.join('')
-        },
+    }, */
+    render: {
+        
     },
     methods: {
-        handleClick() {
-            console.log(1);
+        showMoreTag(arr, index) {
+            this.moreCats = arr
+
+            if (this.moreCatIndex !== index) {
+                this.showCat = true
+            } else {
+                this.showCat = !this.showCat
+            }
+
+            this.moreCatIndex = index
         }
     },
     mounted() {
-        this.print(this.cats);
+        getPlaylistTag().then(res => {
+            this.cats = formatPlaylistTag(res)
+            this.print(this.cats);
+        })
     }
 }
 </script>

@@ -34,11 +34,30 @@ export function getRandomNum(min, max) {
 
 // 歌单标签数据处理
 export function formatPlaylistTag(obj) {
-    /* let res = {}
+    let res = []
 
-    obj.sub.forEach(item => {
-        
-    }) */
+    Object.keys(obj.categories).forEach(key => {
+        let val = obj.categories[key]
+        key = window.parseInt(key)
 
-    return obj
+        res.push({
+            title: val,
+            list: [],
+            more: []
+        })
+
+        obj.sub.forEach(item => {
+            if (item.category === key) {
+                res[key].list.push(item.name)
+            }
+        })
+
+        res.forEach(item => {
+            if (item.list.length > 9) {
+                item.more = item.list.splice(8)
+            }
+        })
+    })
+
+    return res
 }
