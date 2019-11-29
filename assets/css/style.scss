@@ -252,6 +252,7 @@
         }
         .popup-tag {
             position: absolute;
+            z-index: 1;
             top: 146px;
             left: 0;
             right: 24px;
@@ -283,6 +284,13 @@
                     @include bgColor();
                 }
             }
+        }
+    }
+    .creator {
+        @include c_light();
+
+        &:hover {
+            @include highColor();
         }
     }
 }

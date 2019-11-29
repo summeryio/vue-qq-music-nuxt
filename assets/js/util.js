@@ -38,7 +38,7 @@ export function formatPlaylistTag(obj) {
 
     Object.keys(obj.categories).forEach(key => {
         let val = obj.categories[key]
-        key = window.parseInt(key)
+        key = parseInt(key)
 
         res.push({
             title: val,

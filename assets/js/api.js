@@ -37,4 +37,10 @@ export const getAlbum = (page = 1, pageSize = 20) => {
 
 // 歌单
 export const getPlaylistTag = () => get(`/playlist/catlist`)
-export const getPlaylist = () => get(`/top/playlist?limit=20`)
+export const getPlaylist = (tag, page, pageSize) => {
+    let _tag = tag ? encodeURIComponent(tag) : encodeURIComponent('全部')
+    let _page = page || 1
+    let _pageSize = pageSize || 20
+    
+    return get(`/top/playlist?offset=${(_page - 1) * _pageSize}&limit=${_pageSize}&cat=${_tag}`)
+}

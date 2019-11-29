@@ -40,18 +40,31 @@
                         </a>
                         <div class="intro">
                             <a href="/" class="name">{{p.name}}</a>
+                            <a href="/" class="creator">{{p.creator.nickname}}</a>
+                            <p class="count">播放量：{{formatCount(p.playCount)}}</p>
                             <!-- <SingerName :artists="p.artists"></SingerName> -->
                         </div>
                     </div>
                 </li>
             </ul>
       </div>
+      <div class="mod_pagination">
+        <el-pagination
+            background
+            layout="prev, pager, next"
+            :total="total"
+            :page-size="pageSize"
+            :current-page.sync="curPage"
+            @current-change="handlePage"
+        >
+        </el-pagination>
+    </div>
   </div>
 </template>
 
 <script>
 import {getPlaylistTag, getPlaylist} from '@/assets/js/api'
-import {formatPlaylistTag} from '@/assets/js/util'
+import {formatPlaylistTag, formatCount} from '@/assets/js/util'
 export default {
     data () {
         return {
@@ -59,6 +72,7 @@ export default {
             playlists: [],
             total: 0,
             pageSize: 20,
+            curPage: 1,
 
             showMore: false, // 是否显示更多
             moreIndex: null, // 点击更多时存储的index
@@ -70,6 +84,18 @@ export default {
             catIndex: null,
             
             selectedTag: ''
+        }
+    },
+    async asyncData(ctx) {
+        let [playlistsTag, playlistsData] = await Promise.all([
+            getPlaylistTag(),
+            getPlaylist()
+        ])
+
+        return {
+            cats: formatPlaylistTag(playlistsTag),
+            playlists: playlistsData.playlists,
+            total: playlistsData.total
         }
     },
     methods: {
@@ -89,6 +115,8 @@ export default {
             this.moreCatIndex = null
 
             this.selectedTag = text
+            this.curPage = 1
+            this._getPlaylistData()
         },
         handleMoreTagClick(index, catIndex, text) {
             this.moreTagIndex = index
@@ -99,24 +127,29 @@ export default {
             this.catIndex = null
 
             this.selectedTag = text
+            this.curPage = 1
+            this._getPlaylistData()
+        },
+        handlePage(page) {
+            this._getPlaylistData(page)
         },
 
-        _getPlaylistData() {
-            getPlaylist().then(res => {
+        _getPlaylistData(page) {
+            let _page = page || 1
+            
+            getPlaylist(this.selectedTag, _page, this.pageSize).then(res => {
                 this.playlists = res.playlists
+                this.total = res.total
             })
-        }
+        },
+
+        formatCount(count) {
+            return formatCount(count)
+        },
     },
     mounted() {
         let _self = this
         
-        getPlaylistTag().then(res => {
-            this.cats = formatPlaylistTag(res)
-            this.print(this.cats);
-        })
-
-        this._getPlaylistData()
-
         this.globalClick(function () {
             _self.showMore = false
             _self.moreIndex = null
