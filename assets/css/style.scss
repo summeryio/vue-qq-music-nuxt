@@ -219,7 +219,7 @@
                 height: 108px;
                 background-color: #eeeef0;
             }
-            &:last-child::after {
+            &.last:after {
                 background-color: transparent;
             }
         }
@@ -250,6 +250,10 @@
                 &.on {
                     color: #fff;
                     @include bgColor();
+
+                    .el-icon-arrow-down:before {
+                        content: "\e6e1";
+                    }
                 }
             }
         }
@@ -272,6 +276,23 @@
                 float: left;
                 margin-right: 32px;
                 margin-bottom: 4px;
+            }
+            a {
+                display: block;
+                padding: 0 8px;
+                cursor: pointer;
+
+                &:hover {
+                    @include highColor();
+                }
+                &.on {
+                    color: #fff;
+                    @include bgColor();
+
+                    .el-icon-arrow-down:before {
+                        content: "\e6e1";
+                    }
+                }
             }
         }
     }

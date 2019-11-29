@@ -45,18 +45,26 @@
                 </div>
             </div> -->
             <div class="category">
-                <dl v-for="(cat, c) in cats" :key="c" :class="{less: c === 0}">
+                <dl v-for="(cat, c) in cats" :key="c" :class="{less: c === 0, last: c === cats.length - 1}">
                     <dt>{{cat.title}}</dt>
                     <dd v-for="(item, i) in cat.list" :key="i">
-                        <span>{{item}}</span>
+                        <span @click="handleTagClick(i, c)" :class="{on: tagIndex === i && catIndex === c}">{{item}}</span>
                     </dd>
                     <dd v-if="cat.more.length">
-                        <span @click="showMoreTag(cat.more, c)">更多<i class="el-icon-arrow-down"></i></span>
+                        <span 
+                            @click.stop.prevent="showMoreTag(cat.more, c)"
+                            :class="{on: moreCatIndex === c && showMore}"
+                        >
+                            更多
+                            <i class="el-icon-arrow-down"></i>
+                        </span>
                     </dd>
                 </dl>
-                <div class="popup-tag" v-show="showCat">
+                <div class="popup-tag" v-show="showMore">
                     <ul>
-                        <li v-for="(cat, i) in moreCats"><a href="javascript:;">{{cat}}</a></li>
+                        <li v-for="(cat, i) in moreCats">
+                            <a href="javascript:;" @click="handleMoreTagClick(i)" :class="{on: moreTagIndx === i}">{{cat}}</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -70,10 +78,15 @@ import {formatPlaylistTag} from '@/assets/js/util'
 export default {
     data () {
         return {
-            cats: [],
-            moreCats: [],
-            showCat: false,
-            moreCatIndex: 0
+            cats: [], // 分类列表
+            moreCats: [], // 子列表中的更多列表
+            showMore: false, // 是否显示更多
+
+            moreCatIndex: 0, // 点击更多时存储的index
+            moreTagIndx: null,
+
+            tagIndex: null,
+            catIndex: null
         }
     },
     /* asyncData(ctx) {
@@ -91,18 +104,31 @@ export default {
             this.moreCats = arr
 
             if (this.moreCatIndex !== index) {
-                this.showCat = true
+                this.showMore = true
             } else {
-                this.showCat = !this.showCat
+                this.showMore = !this.showMore
             }
 
             this.moreCatIndex = index
+        },
+        handleTagClick(index, catIndex) {
+            this.tagIndex = index
+            this.catIndex = catIndex
+        },
+        handleMoreTagClick(index) {
+            this.moreTagIndx = index
         }
     },
     mounted() {
+        let _self = this
+        
         getPlaylistTag().then(res => {
             this.cats = formatPlaylistTag(res)
             this.print(this.cats);
+        })
+
+        this.globalClick(function () {
+            _self.showMore = false
         })
     }
 }

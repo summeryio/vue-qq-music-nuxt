@@ -43,7 +43,8 @@ export function formatPlaylistTag(obj) {
         res.push({
             title: val,
             list: [],
-            more: []
+            more: [],
+            moreIndex: 0
         })
 
         obj.sub.forEach(item => {
@@ -52,9 +53,10 @@ export function formatPlaylistTag(obj) {
             }
         })
 
-        res.forEach(item => {
+        res.forEach((item, i) => {
             if (item.list.length > 9) {
                 item.more = item.list.splice(8)
+                item.moreIndex = i
             }
         })
     })

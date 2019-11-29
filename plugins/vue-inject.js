@@ -5,3 +5,9 @@ Vue.prototype.print = (obj,type) => {
     const log = JSON.parse(JSON.stringify(obj));
     console[type](log)
 }
+
+Vue.prototype.globalClick = (callback) => {
+    document.getElementById('app').onclick = function () {
+        callback()
+    }
+}
