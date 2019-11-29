@@ -37,3 +37,4 @@ export const getAlbum = (page = 1, pageSize = 20) => {
 
 // 歌单
 export const getPlaylistTag = () => get(`/playlist/catlist`)
+export const getPlaylist = () => get(`/top/playlist?limit=20`)

@@ -195,8 +195,6 @@
 
 // ================ 歌单 ================
 #playlist {
-    height: 800px;
-    
     .category {
         position: relative;
         padding: 30px 0;
@@ -204,7 +202,6 @@
         margin-right: -22px;
         
         dl {
-            position: relative;
             float: left;
             width: 238px;
             line-height: 26px;
@@ -250,10 +247,6 @@
                 &.on {
                     color: #fff;
                     @include bgColor();
-
-                    .el-icon-arrow-down:before {
-                        content: "\e6e1";
-                    }
                 }
             }
         }
@@ -288,10 +281,6 @@
                 &.on {
                     color: #fff;
                     @include bgColor();
-
-                    .el-icon-arrow-down:before {
-                        content: "\e6e1";
-                    }
                 }
             }
         }
