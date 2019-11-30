@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <MHeader />
-    <nuxt />
+    <nuxt :keepAlive="true" />
     <footer id="footer"></footer>
   </div>
 </template>
