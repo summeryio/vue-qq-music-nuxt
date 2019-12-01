@@ -8,7 +8,6 @@
             <Order />
             <List :propPlaylist="playlists" :propTotal="total"/>
         </div>
-        
     </div>
 </template>
 
