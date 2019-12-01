@@ -1,13 +1,3 @@
-export const singer = state => state.singer
 
-
-// 播放器getters
-export const playing = state => state.playing
-export const fullScreen = state => state.fullScreen
-export const playlist = state => state.playlist
-export const sequenceList = state => state.sequenceList
-export const mode = state => state.mode
-export const currentIndex = state => state.currentIndex
-export const currentSong = (state) => {
-  return state.playlist[state.currentIndex] || {}
-}
+export const playlistSelectedTag = state => state.playlistSelectedTag
+export const playlistOrder = state => state.playlistOrder

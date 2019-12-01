@@ -1,5 +1,5 @@
 <template>
-    <div class="category" v-show="playing">
+    <div class="category">
         <dl v-for="(cat, c) in cats" :key="c" :class="{less: c === 0, last: c === cats.length - 1}">
             <dt>{{cat.title}}</dt>
             <dd v-for="(item, i) in cat.list" :key="i">
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import {mapGetters, mapMutations, mapState} from 'vuex'
+import {mapMutations, mapGetters} from 'vuex'
 export default {
     props: {
         cats: {
@@ -64,9 +64,8 @@ export default {
 
             this.moreCatIndex = null
 
-            // this.selectedTag = text
-            // this.curPage = 1
-            // this._getPlaylistData()
+            this.setPlaylistSelectedTag(text)
+            
         },
         handleMoreTagClick(index, catIndex, text) {
             this.moreTagIndex = index
@@ -75,14 +74,13 @@ export default {
             this.showMore = true
             this.moreTagText = text
             this.catIndex = null
+
+            this.setPlaylistSelectedTag(text)
         },
 
         ...mapMutations({
-            setFullScreen: 'SET_FULL_SCREEN',
-            setPlaying: 'SET_PLAYING',
-            setCurrentIndex: 'SET_CURRENT_INDEX',
-            setPlayMode: 'SET_PLAY_MODE',
-            setPlayList: 'SET_PLAYLIST'
+            setPlaylistSelectedTag: 'SET_PLAYLISTY_SELECTED_TAG',
+            setPlaylistOrder: 'SET_PLAYLISTY_ORDER'
         })
     },
     mounted() {
@@ -92,14 +90,19 @@ export default {
             _self.showMore = false
             _self.moreIndex = null
         })
-
-        // console.log(this.setFullScreen);
-        // console.log(mapGetters);
     },
     computed: {
         ...mapGetters([
-            'playing'
-        ]),
+            'playlistSelectedTag'
+        ])
+    },
+    watch: {
+        playlistSelectedTag(newTag) { // 切换到全部歌单，把标签高亮去掉
+            if (!newTag) {
+                this.moreCatIndex = null
+                this.catIndex = null
+            }
+        }
     }
 }
 </script>

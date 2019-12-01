@@ -1,21 +1,13 @@
 <template>
-    <div>
-        <ul class="mod_playlist_box">
-            <li v-for="p in playlists" :key="p.id">
-                <div class="wrapper">
-                    <a href="/" class="pic mod_cover">
-                        <img v-lazy="p.coverImgUrl + '?param=300y300'" >
-                        <i class="mask mod_mask"></i>
-                        <i class="play mod_icon_play"></i>
-                    </a>
-                    <div class="intro">
-                        <a href="/" class="name">{{p.name}}</a>
-                        <a href="/" class="creator">{{p.creator.nickname}}</a>
-                        <p class="count">播放量：{{formatCount(p.playCount)}}</p>
-                    </div>
-                </div>
-            </li>
-        </ul>
+    <div class="qq_music" id="playlist">
+        <div class="section-inner">
+            <h3 class="mod_types-title">
+                <span class="tit-icon icon-star-l tit-icon-l"></span><em>歌</em>／<em>单</em>／<em>推</em>／<em>荐</em><span class="tit-icon icon-star-r tit-icon-r"></span>
+            </h3>
+            <Category :cats="cats"/>
+            <Order />
+            <List :playlists="playlists"/>
+        </div>
         <div class="mod_pagination">
             <el-pagination
                 background
@@ -32,24 +24,18 @@
 
 <script>
 import {mapGetters, mapMutations} from 'vuex'
-import {getPlaylist} from '@/assets/js/api'
-import {formatCount} from '@/assets/js/util'
+import Category from '@/components/playlist/Category'
+import List from '@/components/playlist/List'
+import Order from '@/components/playlist/Order'
 
+import {getPlaylistTag, getPlaylist} from '@/assets/js/api'
+import {formatPlaylistTag, formatCount} from '@/assets/js/util'
 export default {
-    props: {
-        propPlaylist: {
-            type: Array,
-            default: () => {}
-        },
-        propTotal: {
-            type: Number,
-            default: 0
-        }
-    },
     data () {
         return {
-            playlists: this.propPlaylist,
-            total: this.propTotal,
+            cats: [],
+            playlists: [],
+            total: 0,
             pageSize: 20,
             curPage: 1,
             
@@ -57,9 +43,16 @@ export default {
             order: 'hot'
         }
     },
-    methods: {
-        formatCount(count) {
-            return formatCount(count)
+    async asyncData(ctx) {
+        let [playlistsTag, playlistsData] = await Promise.all([
+            getPlaylistTag(),
+            getPlaylist()
+        ])
+
+        return {
+            cats: formatPlaylistTag(playlistsTag),
+            playlists: playlistsData.playlists,
+            total: playlistsData.total
         }
     },
     computed: {
@@ -90,6 +83,11 @@ export default {
             setPlaylistOrder: 'SET_PLAYLISTY_ORDER'
         })
     },
+    components: {
+        Category,
+        List,
+        Order
+    },
     watch: {
         playlistSelectedTag(newTag) {
             this.selectedTag = newTag
@@ -109,3 +107,7 @@ export default {
     }
 }
 </script>
+
+<style>
+
+</style>

@@ -1,41 +1,31 @@
 <template>
-  <div class="qq_music" id="playlist">
-      <div class="section-inner">
+    <div class="qq_music" id="playlist">
+        <div class="section-inner">
             <h3 class="mod_types-title">
                 <span class="tit-icon icon-star-l tit-icon-l"></span><em>歌</em>／<em>单</em>／<em>推</em>／<em>荐</em><span class="tit-icon icon-star-r tit-icon-r"></span>
             </h3>
             <Category :cats="cats"/>
-            <List :playlists="playlists"/>
-      </div>
-      <div class="mod_pagination">
-        <el-pagination
-            background
-            layout="prev, pager, next"
-            :total="total"
-            :page-size="pageSize"
-            :current-page.sync="curPage"
-            @current-change="handlePage"
-        >
-        </el-pagination>
+            <Order />
+            <List :propPlaylist="playlists" :propTotal="total"/>
+        </div>
+        
     </div>
-  </div>
 </template>
 
 <script>
+import {mapGetters, mapMutations} from 'vuex'
 import Category from '@/components/playlist/Category'
 import List from '@/components/playlist/List'
+import Order from '@/components/playlist/Order'
+
 import {getPlaylistTag, getPlaylist} from '@/assets/js/api'
-import {formatPlaylistTag, formatCount} from '@/assets/js/util'
+import {formatPlaylistTag} from '@/assets/js/util'
 export default {
     data () {
         return {
-            cats: [], // 分类列表
+            cats: [],
             playlists: [],
-            total: 0,
-            pageSize: 20,
-            curPage: 1,
-            
-            selectedTag: ''
+            total: 0
         }
     },
     async asyncData(ctx) {
@@ -50,28 +40,11 @@ export default {
             total: playlistsData.total
         }
     },
-    methods: {
-        handlePage(page) {
-            this._getPlaylistData(page)
-        },
-
-        _getPlaylistData(page) {
-            let _page = page || 1
-            
-            getPlaylist(this.selectedTag, _page, this.pageSize).then(res => {
-                this.playlists = res.playlists
-                this.total = res.total
-            })
-        },
-
-        formatCount(count) {
-            return formatCount(count)
-        },
-    },
     components: {
         Category,
-        List
-    }
+        List,
+        Order
+    },
 }
 </script>
 

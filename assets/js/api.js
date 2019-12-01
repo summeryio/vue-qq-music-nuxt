@@ -37,10 +37,12 @@ export const getAlbum = (page = 1, pageSize = 20) => {
 
 // 歌单
 export const getPlaylistTag = () => get(`/playlist/catlist`)
-export const getPlaylist = (tag, page, pageSize) => {
+export const getPlaylist = (tag, page, pageSize, order) => {
+    // 这里定义的变量，都是给asyncData获取数据用的，其他时候按照传递的值
     let _tag = tag ? encodeURIComponent(tag) : encodeURIComponent('全部')
     let _page = page || 1
     let _pageSize = pageSize || 20
-    
-    return get(`/top/playlist?offset=${(_page - 1) * _pageSize}&limit=${_pageSize}&cat=${_tag}`)
+    let _order = order || 'hot'
+
+    return get(`/top/playlist?offset=${(_page - 1) * _pageSize}&limit=${_pageSize}&cat=${_tag}&order=${_order}`)
 }
