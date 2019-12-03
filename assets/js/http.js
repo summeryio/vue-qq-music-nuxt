@@ -4,7 +4,7 @@
 import axios from 'axios';
 import QS from 'qs';
 import Vue from 'vue'
-// import {Message, Notification} from 'element-ui'
+import {Message, Notification} from 'element-ui'
 
 // 环境的切换
 if (process.env.NODE_ENV == 'development') {    
@@ -47,8 +47,8 @@ axios.interceptors.response.use(
     },
     // 服务器状态码不是200的情况    
     error => {  
-        return error      
-        /* if (error.response.status) {
+        // return error      
+        if (error.response.status) {
             Notification({
                 title: 'Error',
                 message: '数据获取出错，请刷新重试！',
@@ -56,7 +56,7 @@ axios.interceptors.response.use(
             })
                 
             return Promise.reject(error.response);        
-        }    */
+        }
     }
 );
 /** 

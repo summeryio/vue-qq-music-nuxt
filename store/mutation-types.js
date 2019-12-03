@@ -1,3 +1,9 @@
 
+// 歌单
 export const SET_PLAYLISTY_SELECTED_TAG = 'SET_PLAYLISTY_SELECTED_TAG'
 export const SET_PLAYLISTY_ORDER = 'SET_PLAYLISTY_ORDER'
+
+// MV
+export const SET_MV_AREA_TAG = 'SET_MV_AREA_TAG'
+export const SET_MV_TYPE_TAG = 'SET_MV_TYPE_TAG'
+export const SET_MV_ORDER = 'SET_MV_ORDER'

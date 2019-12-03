@@ -6,6 +6,7 @@
             </h3>
             <Category />
             <Order />
+            <List :propMVs="mvs" :propTotal="total" />
         </div>
     </div>
 </template>
@@ -13,10 +14,28 @@
 <script>
 import Category from '@/components/mv/Category'
 import Order from '@/components/mv/Order'
+import List from '@/components/mv/List'
+import {getMV} from '@/assets/js/api'
+
 export default {
+    data() {
+        return {
+            mvs: [],
+            total: 0
+        }
+    },
+    asyncData(ctx) {
+        return getMV().then(res => {
+            return {
+                mvs: res.data,
+                total: res.count
+            }
+        })
+    },
     components: {
         Category,
-        Order
+        Order,
+        List
     },
 }
 </script>

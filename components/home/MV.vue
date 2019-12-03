@@ -6,7 +6,7 @@
         <Slider :tags="tags" @select="changeTag" :mark="mark">
             <div class="swiper-wrapper">
                 <div class="swiper-slide" v-for="(slide, i) in datas" :key="i">
-                    <ul class="mv-list">
+                    <ul class="mod_mv_list">
                         <li v-for="item in slide" :key="item.id">
                             <div class="wrapper">
                                 <a href="/" class="pic mod_cover">

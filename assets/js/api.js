@@ -46,3 +46,15 @@ export const getPlaylist = (tag, page, pageSize, order) => {
 
     return get(`/top/playlist?offset=${(_page - 1) * _pageSize}&limit=${_pageSize}&cat=${_tag}&order=${_order}`)
 }
+
+
+// MV
+export const getMV = (area, type, order, page, pageSize) => {
+    let _area = area ? encodeURIComponent(area) : encodeURIComponent('全部')
+    let _type = type ? encodeURIComponent(type) : encodeURIComponent('全部')
+    let _order = order ? encodeURIComponent(order) : encodeURIComponent('上升最快')
+    let _page = page || 1
+    let _pageSize = pageSize || 20
+
+    return get(`/mv/all?area=${_area}&type=${_type}&order=${_order}&offset=${(_page - 1) * _pageSize}&limit=${_pageSize}`)
+}
